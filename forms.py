@@ -3,8 +3,10 @@ import datetime
 from django import forms
 from django.contrib.auth.models import User
 
-from quanda.models import Question, QuestionList, QuestionListOrder, QuestionTag, Answer, Profile, Comment
+from quanda.models import Question, QuestionList, QuestionListOrder, QuestionTag, Answer, Comment
 from quanda.utils import strip_js
+
+from profile.models import Profile
 
 class QuestionForm(forms.ModelForm):
     
@@ -85,27 +87,6 @@ class AnswerForm(forms.ModelForm):
                 raise forms.ValidationError("You've already answered this question.")
         return self.cleaned_data
     
-class RepForm(forms.Form):
-    base_rep = forms.IntegerField()
-    #username = forms.CharField(max_length=140, widget=forms.HiddenInput, required=True)
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        exclude = ['user', 'reputation']
-    
-    def __init__(self, user, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
-        self.user = user
-    
-    def save(self, *args, **kwargs):
-        kwargs['commit'] = False
-        profile = super(ProfileForm, self).save(*args, **kwargs)
-        profile.bio = strip_js(profile.bio)
-        profile.user = self.user
-        profile.save()
-        return profile
-
 class QuestionListForm(forms.ModelForm):
     class Meta:
         model = QuestionList

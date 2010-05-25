@@ -17,20 +17,6 @@ from django.template.defaultfilters import slugify
 #        format = "%b %d %y"
 #    return u"%s" % obj.posted.strftime(format)
 
-class Profile(models.Model):
-    """A user using the Quanda system. This can be an anonymous user."""
-    user = models.OneToOneField(User)
-    
-    # Since rep is calculated dynamically, this represents reputation awarded
-    # outside the regular rep process (say by an admin)
-    reputation = models.IntegerField(default=0)
-    website = models.CharField(max_length=140, blank=True)
-    bio = models.TextField(blank=True)
-    location = models.CharField(max_length=140, blank=True)
-    
-    def __unicode__(self):
-        return u"quanda user %s" % self.user
-
 class QuestionManager(models.Manager): pass
 
 class Question(models.Model):

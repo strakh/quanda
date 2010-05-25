@@ -10,9 +10,11 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 import quanda.models
-from quanda.forms import QuestionForm, QuestionTagForm, QuestionListForm, QuestionListOrderForm, QuestionListAddForm, AnswerForm, RepForm, ProfileForm, CommentForm
-from quanda.models import Question, QuestionVote, QuestionTag, QuestionList, QuestionListOrder, QuestionView, Answer, AnswerVote, Profile, Comment
+from quanda.forms import QuestionForm, QuestionTagForm, QuestionListForm, QuestionListOrderForm, QuestionListAddForm, AnswerForm, CommentForm
+from quanda.models import Question, QuestionVote, QuestionTag, QuestionList, QuestionListOrder, QuestionView, Answer, AnswerVote, Comment
 from quanda.utils import get_user_rep
+from profile.models import Profile
+from profile.forms import ProfileForm, RepForm
 
 TINY_MCE_JS_LOCATION = getattr(settings, 'TINY_MCE_JS_LOCATION', 'http://teebes.com/static/js/tiny_mce/tiny_mce.js')
 
@@ -64,7 +66,8 @@ def search(request):
 def profile(request, username):
     
     user = get_object_or_404(User, username=username)
-    profile = Profile.objects.get_or_create(user=user)[0]
+#    profile = Profile.objects.get_or_create(user=user)[0]
+    profile = user.get_profile()
 
     if request.method == 'POST':
         if request.POST.has_key('change_rep'):
@@ -78,13 +81,13 @@ def profile(request, username):
         elif request.POST.has_key('save_profile'):
             if not request.user == profile.user:
                 return HttpResponse("Unauthorized")
-            profile_form = ProfileForm(user, request.POST, instance=profile)
+            profile_form = ProfileForm(request.POST, instance=profile)
             if profile_form.is_valid():
                 #return HttpResponse("ready to save")
                 profile = profile_form.save()
                 return HttpResponseRedirect(reverse('quanda_public_profile', args=[username]))
     else:
-        profile_form = ProfileForm(user, instance=profile)
+        profile_form = ProfileForm(instance=profile)
         rep_form = RepForm(initial={'base_rep': profile.reputation})
     
     return render_to_response("quanda/profile.html", {

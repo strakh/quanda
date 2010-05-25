@@ -5,7 +5,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models import Sum
 
-from quanda.models import Question, QuestionVote, Profile, Answer, AnswerVote
+from quanda.models import Question, QuestionVote, Answer, AnswerVote
+from profile.models import Profile
 
 QUESTION_VOTED_UP = getattr(settings, 'QUESTION_VOTED_UP', 10)
 QUESTION_VOTED_DOWN = getattr(settings, 'QUESTION_VOTED_DOWN', 5)

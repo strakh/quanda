@@ -1,6 +1,43 @@
-{% extends "layout/base.html" %}
+{% extends "site_base.html" %}
 
-{% block layout %}
+{% block extra_head %}
+    <style type='text/css'>
+        #body_content {
+            float: left;
+            min-height: 400px;
+        }
+        #right_column {
+            float: left;
+            overflow: hidden;
+            width: 180px;
+        }
+        .column_block {
+            border-bottom: 1px solid #CCCCCC;
+            display: block;
+            padding: 15px;            
+        }
+        .quanda_std_table th {
+            text-align: right;
+            vertical-align: top;
+        }
+        .quanda_std_table ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #rss_icon {
+            border: 0;
+            position: relative;
+            top: 6px;
+            width: 20px;
+        }        
+    </style>
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+{% endblock %}
+
+{% block body %}
 
 <div id="body_content" style='width: 619px; border-right: 1px solid #cccccc;'>
 {% block body_content %}

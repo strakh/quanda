@@ -34,6 +34,7 @@ urlpatterns = patterns('quanda.views',
     url(r'^tags/(?P<tag_id>\w+)/$', 'view_tag', name='quanda_view_tag'),
         
     (r'^install/$', 'install'),
+    (r'^api/', include('quanda.api.urls')),
     
 )
 

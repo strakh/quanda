@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 
 from quanda.models import Question, QuestionVote, Answer, AnswerVote
-from profile.models import Profile
+from umoja_profiles.models import UserProfile as Profile
 
 QUESTION_VOTED_UP = getattr(settings, 'QUESTION_VOTED_UP', 10)
 QUESTION_VOTED_DOWN = getattr(settings, 'QUESTION_VOTED_DOWN', 5)

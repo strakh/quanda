@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from quanda.models import Question, QuestionList, QuestionListOrder, QuestionTag, Answer, Comment
 from quanda.utils import strip_js
 
-from profile.models import Profile
+from umoja_profiles.models import UserProfile as Profile
 
 class QuestionForm(forms.ModelForm):
     

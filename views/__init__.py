@@ -13,8 +13,8 @@ import quanda.models
 from quanda.forms import QuestionForm, QuestionTagForm, QuestionListForm, QuestionListOrderForm, QuestionListAddForm, AnswerForm, CommentForm
 from quanda.models import Question, QuestionVote, QuestionTag, QuestionList, QuestionListOrder, QuestionView, Answer, AnswerVote, Comment
 from quanda.utils import get_user_rep
-from profile.models import Profile
-from profile.forms import ProfileForm, RepForm
+from umoja_profiles.models import UserProfile as Profile
+from umoja_profiles.forms import UserProfileForm, RepForm
 
 TINY_MCE_JS_LOCATION = getattr(settings, 'TINY_MCE_JS_LOCATION', 'http://teebes.com/static/js/tiny_mce/tiny_mce.js')
 
